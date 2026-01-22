@@ -4,7 +4,7 @@ extends Node2D
 
 const CARD_SCENE_PATH = "res://Scene/Card.tscn"
 const CARD_DRAW_SPEED = 0.25   #aumenta per rallentare animazione pescaggio
-const STARTING_HAND_SIZE = 5
+const STARTING_HAND_SIZE = 6
 
 @export var deck_data: DeckData
 var player_deck = []

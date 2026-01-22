@@ -336,12 +336,22 @@ func _receive_deck_data(deck_dict: Dictionary):
 	remote_deck_data = deck_data
 	_check_both_ready()
 
+#func _check_both_ready():
+	#if local_deck_data and remote_deck_data and not both_ready:
+		#both_ready = true
+		#print("✅ Entrambi i deck ricevuti — avvio scena.")
+		#_start_game()
 func _check_both_ready():
 	if local_deck_data and remote_deck_data and not both_ready:
 		both_ready = true
-		print("✅ Entrambi i deck ricevuti — avvio scena.")
-		_start_game()
 
+		if multiplayer.is_server():
+			print("✅ Host pronto — avvio partita per tutti")
+			rpc("_rpc_start_game")
+
+@rpc("authority", "call_local")
+func _rpc_start_game():
+	_start_game()
 # ==============================================================
 # 🎮 ISTANZIA SCENE QUANDO PRONTI
 # ==============================================================
